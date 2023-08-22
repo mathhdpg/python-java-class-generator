@@ -1,16 +1,17 @@
 from file_utils import write_to_file
 from string_utils import *
 
-ENTITY_TEMPLATE_FILE = "file-models/DtoModel.txt"
+DTO_TEMPLATE_FILE = "file-models/DtoModel.txt"
+GENERATE_PATH = "generated/"
 
 def generate_dto(class_name, fields):
-    with open(ENTITY_TEMPLATE_FILE, "r") as file:
+    with open(DTO_TEMPLATE_FILE, "r") as file:
         template_content = file.read()
 
     template_content = template_content.replace("{{ClassName}}", class_name)
     template_content = template_content.replace("{{FieldsDeclaration}}", _generate_fields(class_name, fields))
 
-    write_to_file(class_name + "DTO.java", template_content)
+    write_to_file(GENERATE_PATH + class_name + "DTO.java", template_content)
 
 def _generate_fields(class_name, fields):
     fields_code = ""

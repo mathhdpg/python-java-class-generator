@@ -1,0 +1,13 @@
+package com.smartbr.clinica.repository;
+
+import com.smartbr.clinica.model.entity.generic.{{ClassName}};
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
+
+public interface {{ClassName}}Repository extends JpaRepository<{{ClassName}}, Integer>, JpaSpecificationExecutor<{{ClassName}}> {
+
+{{findByUniqueMethods}}
+
+}

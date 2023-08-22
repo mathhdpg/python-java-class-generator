@@ -1,4 +1,5 @@
 import psycopg2
+import argparse
 
 from entity_generator import generate_entity
 from dto_generator import generate_dto
@@ -62,11 +63,11 @@ def get_class_fields(columns, pks, fks, unique):
         class_fields.append(field_object)
     return class_fields
 
-def main():
+def main(table_name):
     try:
         conn = get_connection()
 
-        table_name = "pedido"
+        # table_name = "pedido"
         class_name = get_class_name_by_table_name(table_name)
 
         columns = get_table_structure(conn, table_name)
@@ -76,7 +77,7 @@ def main():
 
         fields = get_class_fields(columns, pks, fks, unique)
 
-        # generate_entity(table_name, class_name, fields)
+        generate_entity(table_name, class_name, fields)
         generate_dto(class_name, fields)
         # generate_service(class_name, fields)
         # generate_controller(class_name, fields)
@@ -90,4 +91,8 @@ def main():
             conn.close()
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Generate DTO classes from a database table")
+    parser.add_argument("table_name", help="Name of the database table to generate DTO for")
+    args = parser.parse_args()
+
+    main(args.table_name)

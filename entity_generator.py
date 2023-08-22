@@ -2,6 +2,7 @@ from file_utils import write_to_file
 from string_utils import *
 
 ENTITY_TEMPLATE_FILE = "file-models/EntityModel.txt"
+GENERATE_PATH = "generated/"
 
 def generate_entity(table_name, class_name, fields):
     with open(ENTITY_TEMPLATE_FILE, "r") as file:
@@ -13,7 +14,7 @@ def generate_entity(table_name, class_name, fields):
 
     template_content = template_content.replace("{{FieldsDeclaration}}", _generate_fields(table_name, fields))
 
-    write_to_file(class_name + ".java", template_content)
+    write_to_file(GENERATE_PATH + class_name + ".java", template_content)
 
 def _generate_fields(table_name, fields):
     table_name_without_prefix = table_name.replace("lca_", "")
