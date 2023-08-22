@@ -1,0 +1,12 @@
+package com.smartbr.clinica.service;
+
+import com.smartbr.clinica.model.dto.{{ClassName}}DTO;
+import com.smartbr.clinica.model.entity.generic.{{ClassName}};
+
+public interface {{ClassName}}Service extends IAbstractService<{{ClassName}}, Integer, {{ClassName}}DTO> {
+
+    {{ClassName}} incluir({{ClassName}} {{ClassNameParameter}})
+
+    {{ClassName}} editar(Integer id{{ClassName}}, {{ClassName}} {{ClassNameParameter}})
+
+}

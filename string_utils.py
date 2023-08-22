@@ -1,6 +1,7 @@
 def get_attribute_name(field_name):
     words = field_name.split('_')
     attribute_name = words[0] + ''.join(word.capitalize() for word in words[1:])
+    attribute_name = attribute_name[0].lower() + attribute_name[1:]
     return attribute_name
 
 def get_capitalized_attribute_name(field_name):

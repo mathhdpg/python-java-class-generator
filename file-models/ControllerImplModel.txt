@@ -1,0 +1,28 @@
+package com.smartbr.clinica.controller;
+
+import com.smartbr.clinica.controller.interfaces.I{{ClassName}}Controller;
+import com.smartbr.clinica.controller.system.AbstractGenericController;
+import com.smartbr.clinica.model.dto.{{ClassName}}DTO;
+import com.smartbr.clinica.model.entity.{{ClassName}};
+import com.smartbr.clinica.service.{{ClassName}}Service;
+
+@RestController
+@RequiredArgsConstructor
+public class {{ClassName}}Controller extends AbstractGenericController<{{ClassName}}Service, {{ClassName}}DTO> implements I{{ClassName}}Controller{
+
+    private final {{ClassName}}Service {{ClassNameParameter}}Service
+
+    @Override
+    public {{ClassName}}DTO incluir({{ClassName}}DTO {{ClassNameParameter}}DTO) {
+        {{ClassName}} {{ClassNameParameter}} = converterDTOParaEntity({{ClassNameParameter}}DTO, {{ClassName}}.class);
+        {{ClassNameParameter}} = {{ClassNameParameter}}Service.incluir({{ClassNameParameter}});
+        return converterEntityParaDTO({{ClassNameParameter}}, {{ClassName}}DTO.class);
+    }
+
+    @Override
+    public {{ClassName}}DTO editar(Integer id{{ClassName}}, {{ClassName}}DTO {{ClassNameParameter}}DTO) {
+        {{ClassName}} {{ClassNameParameter}} = converterDTOParaEntity({{ClassNameParameter}}DTO, {{ClassName}}.class);
+        {{ClassNameParameter}} = {{ClassNameParameter}}Service.editar(id{{ClassName}}, {{ClassNameParameter}});
+        return converterEntityParaDTO({{ClassNameParameter}}, {{ClassName}}DTO.class);
+    }
+}
