@@ -1,0 +1,14 @@
+package com.smartbr.clinica.model.dto;
+
+import com.smartbr.clinica.model.dto.system.AbstractDTO;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class {{ClassName}}DTO extends AbstractDTO<Integer> {
+
+{{FieldsDeclaration}}
+
+}
