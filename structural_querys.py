@@ -17,6 +17,7 @@ def get_table_structure(conn, table_name):
 
     return columns
 
+
 def get_primary_keys(conn, table_name):
     query = """
         SELECT a.attname AS column_name
@@ -30,6 +31,7 @@ def get_primary_keys(conn, table_name):
         pks = cursor.fetchall()
 
     return [pk[0] for pk in pks]
+
 
 def get_foreign_keys(conn, table_name):
     query = """
@@ -56,7 +58,8 @@ def get_foreign_keys(conn, table_name):
         except Exception as e:
             print("Error fetching foreign keys:", e)
             return []
-        
+
+
 def get_unique_fields(conn, table_name):
     query = """
         SELECT

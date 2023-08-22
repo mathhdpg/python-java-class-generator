@@ -4,14 +4,18 @@ from string_utils import *
 REPOSITORY_TEMPLATE_FILE = "file-models/RepositoryModel.txt"
 GENERATE_PATH = "generated/"
 
+
 def generate_repository(class_name, fields):
     with open(REPOSITORY_TEMPLATE_FILE, "r") as file:
         template_content = file.read()
 
     template_content = template_content.replace("{{ClassName}}", class_name)
-    template_content = template_content.replace("{{findByUniqueMethods}}", _generate_unique_queries(class_name, fields))
+    template_content = template_content.replace(
+        "{{findByUniqueMethods}}", _generate_unique_queries(class_name, fields)
+    )
 
-    write_to_file(GENERATE_PATH + class_name + "Repository.java", template_content)
+    write_to_file(GENERATE_PATH, class_name + "Repository.java", template_content)
+
 
 def _generate_unique_queries(class_name, fields):
     fields_code = ""

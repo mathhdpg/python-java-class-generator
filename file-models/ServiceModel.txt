@@ -7,6 +7,6 @@ public interface {{ClassName}}Service extends IAbstractService<{{ClassName}}, In
 
     {{ClassName}} incluir({{ClassName}} {{ClassNameParameter}})
 
-    {{ClassName}} editar(Integer id{{ClassName}}, {{ClassName}} {{ClassNameParameter}})
+    void editar(Integer id{{ClassName}}, {{ClassName}} {{ClassNameParameter}})
 
 }

@@ -5,6 +5,7 @@ import com.smartbr.clinica.controller.system.AbstractGenericController;
 import com.smartbr.clinica.model.dto.{{ClassName}}DTO;
 import com.smartbr.clinica.model.entity.{{ClassName}};
 import com.smartbr.clinica.service.{{ClassName}}Service;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,9 +21,8 @@ public class {{ClassName}}Controller extends AbstractGenericController<{{ClassNa
     }
 
     @Override
-    public {{ClassName}}DTO editar(Integer id{{ClassName}}, {{ClassName}}DTO {{ClassNameParameter}}DTO) {
+    public void editar(Integer id{{ClassName}}, {{ClassName}}DTO {{ClassNameParameter}}DTO) {
         {{ClassName}} {{ClassNameParameter}} = converterDTOParaEntity({{ClassNameParameter}}DTO, {{ClassName}}.class);
-        {{ClassNameParameter}} = {{ClassNameParameter}}Service.editar(id{{ClassName}}, {{ClassNameParameter}});
-        return converterEntityParaDTO({{ClassNameParameter}}, {{ClassName}}DTO.class);
+        {{ClassNameParameter}}Service.editar(id{{ClassName}}, {{ClassNameParameter}});
     }
 }

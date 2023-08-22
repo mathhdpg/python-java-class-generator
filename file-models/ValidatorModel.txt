@@ -1,0 +1,24 @@
+package com.smartbr.clinica.validador;
+
+import com.smartbr.clinica.model.entity.{{ClassName}};
+import com.smartbr.clinica.pattern.validador.AbstractValidatorImpl;
+import com.smartbr.clinica.pattern.validador.ValidateMandatoryFields;
+
+public class Validador{{ClassName}} extends AbstractValidatorImpl<{{ClassName}}> {
+
+    @Override
+    public void validateRequiredFields(final {{ClassName}} {{ClassNameParameter}}) {
+        ValidateMandatoryFields validate = new ValidateMandatoryFields();
+
+        //validate.add({{ClassNameParameter}}.getNome(), "Nome");
+        // TODO
+
+        validate.validate();
+    }
+
+    @Override
+    public void validateInsertOrUpdate({{ClassName}} {{ClassNameParameter}}) {
+        validateRequiredFields({{ClassNameParameter}});
+    }
+
+}

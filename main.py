@@ -6,9 +6,11 @@ from dto_generator import generate_dto
 from repository_generator import generate_repository
 from service_generator import generate_service, generate_service_impl
 from controller_generator import generate_controller, generate_controller_impl
+from validator_generator import generate_validator
 from structural_querys import *
 from connection import get_connection
 from string_utils import get_class_name_by_table_name
+
 
 def get_class_fields(columns, pks, fks, unique):
     class_fields = []
@@ -17,14 +19,14 @@ def get_class_fields(columns, pks, fks, unique):
         field_name = column[0]
         data_type = column[1]
         character_max_length = column[2]
-        is_nullable = (column[3] == "YES")
+        is_nullable = column[3] == "YES"
         referenced_table = None
         referenced_field = None
         temporal_type = ""
         java_type = "String"
-        is_primary_key = (field_name in pks)
+        is_primary_key = field_name in pks
         is_foreign_key = any(fk[2] == field_name for fk in fks)
-        is_unique = any(field_name in un[2] for un in unique)        
+        is_unique = any(field_name in un[2] for un in unique)
 
         if data_type == "character varying":
             java_type = "String"
@@ -41,15 +43,15 @@ def get_class_fields(columns, pks, fks, unique):
             java_type = "Date"
             temporal_type = "TIMESTAMP"
         else:
-            print("TIPO NÃO TRATADO: %s",  data_type)
-        
+            print("TIPO NÃO TRATADO: %s", data_type)
+
         if is_foreign_key:
             for fk in fks:
                 if fk[2] == field_name:
                     referenced_table = fk[3]
-                    referenced_field = "id" #fk[4]
+                    referenced_field = "id"  # fk[4]
                     break
-        
+
         field_object = {
             "field_name": field_name,
             "field_type": java_type,
@@ -60,11 +62,12 @@ def get_class_fields(columns, pks, fks, unique):
             "is_foreign_key": is_foreign_key,
             "referenced_table": referenced_table,
             "referenced_field": referenced_field,
-            "temporal_type": temporal_type
+            "temporal_type": temporal_type,
         }
-        
+
         class_fields.append(field_object)
     return class_fields
+
 
 def main(table_name):
     try:
@@ -84,10 +87,10 @@ def main(table_name):
         generate_dto(class_name, fields)
         generate_service(class_name)
         generate_service_impl(class_name, fields)
-        generate_controller(class_name)
+        generate_controller(class_name, table_name)
         generate_controller_impl(class_name)
         generate_repository(class_name, fields)
-        # generate_validator(class_name, fields)
+        generate_validator(class_name, fields)
 
     except psycopg2.Error as e:
         print("Error:", e)
@@ -95,9 +98,14 @@ def main(table_name):
         if conn:
             conn.close()
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate DTO classes from a database table")
-    parser.add_argument("table_name", help="Name of the database table to generate DTO for")
+    parser = argparse.ArgumentParser(
+        description="Generate DTO classes from a database table"
+    )
+    parser.add_argument(
+        "table_name", help="Name of the database table to generate DTO for"
+    )
     args = parser.parse_args()
 
     main(args.table_name)

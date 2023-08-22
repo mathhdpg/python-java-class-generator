@@ -1,0 +1,33 @@
+package com.smartbr.clinica.controller.interfaces;
+
+import com.smartbr.clinica.model.dto.{{ClassName}}DTO;
+import com.smartbr.clinica.model.entity.generic.Role;
+import com.smartbr.clinica.pattern.constants.OperationsParam;
+import com.smartbr.clinica.pattern.constants.OperationsPath;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+@RequestMapping(value = I{{ClassName}}Controller.PATH)
+@Api(tags = I{{ClassName}}Controller.TAG)
+@Tag(name = I{{ClassName}}Controller.TAG, description = "Operações sobre {{ClassNameParameter}}")
+public interface I{{ClassName}}Controller extends IAbstractController<{{ClassName}}DTO> {
+
+    String PATH = "${api.prefix.v1}/{{ClassNameControllerPath}}";
+
+    String TAG = "{{ClassName}}";
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "${{{ClassNameParameter}}.incluir.operation}", notes = "${{{ClassNameParameter}}.incluir.description}")
+    {{ClassName}}DTO incluir(@RequestBody {{ClassName}}DTO {{ClassNameParameter}}DTO);
+
+    @PutMapping(OperationsPath.ID)
+    @ApiOperation(value = "${{{ClassNameParameter}}.editar.operation}", notes = "${{{ClassNameParameter}}.editar.description}")
+    void editar(@ApiParam("${{{ClassNameParameter}}.id}") @PathVariable(OperationsParam.ID) Integer id{{ClassName}},
+                @RequestBody {{ClassName}}DTO {{ClassNameParameter}}DTO);
+
+}
