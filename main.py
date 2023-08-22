@@ -3,6 +3,7 @@ import argparse
 
 from entity_generator import generate_entity
 from dto_generator import generate_dto
+from repository_generator import generate_repository
 from structural_querys import *
 from connection import get_connection
 from string_utils import get_class_name_by_table_name
@@ -77,11 +78,11 @@ def main(table_name):
 
         fields = get_class_fields(columns, pks, fks, unique)
 
-        generate_entity(table_name, class_name, fields)
-        generate_dto(class_name, fields)
+        # generate_entity(table_name, class_name, fields)
+        # generate_dto(class_name, fields)
         # generate_service(class_name, fields)
         # generate_controller(class_name, fields)
-        # generate_repository(class_name, fields)
+        generate_repository(class_name, fields)
         # generate_validator(class_name, fields)
 
     except psycopg2.Error as e:

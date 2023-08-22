@@ -3,6 +3,10 @@ def get_attribute_name(field_name):
     attribute_name = words[0] + ''.join(word.capitalize() for word in words[1:])
     return attribute_name
 
+def get_capitalized_attribute_name(field_name):
+    words = field_name.split('_')
+    return ''.join(word.capitalize() for word in words)
+
 def get_fk_field_name(field_name):
     return field_name.replace("id_", "").replace("_id", "")
 
